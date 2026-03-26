@@ -1,352 +1,362 @@
-/* 
-   LuxeHome Interactivity & Mobile Logic
-*/
+/**
+ * FloraHome - Core Logic
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Handle Scroll Effects for Header
-    const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+    // 1. Products Data
+    const products = [
+        // --- Букет дня (4 items) ---
+        { id: 'bd1', name: 'Ранковий Сюрприз', price: 1990, category: 'bouquet-dnya', tag: 'БУКЕТ ДНЯ', image: 'assets/img/bd1.png', flowers: 'Троянди, альстромерія, зелень', bestFor: 'Будь-який привід, щоденна радість' },
+        { id: 'bd2', name: 'Вечірній Акорд', price: 2290, category: 'bouquet-dnya', tag: 'БУКЕТ ДНЯ', image: 'assets/img/bd2.png', flowers: 'Хризантеми, гербери, евкаліпт', bestFor: 'Подарунок без приводу, офіс' },
+        { id: 'bd3', name: 'Полудень у Саду', price: 1750, category: 'bouquet-dnya', tag: 'БУКЕТ ДНЯ', image: 'assets/img/bd3.png', flowers: 'Польові квіти, лаванда, ромашки', bestFor: 'Дача, природний інтер\'єр' },
+        { id: 'bd4', name: 'Денний Шик', price: 2490, category: 'bouquet-dnya', tag: 'БУКЕТ ДНЯ', image: 'assets/img/bd4.png', flowers: 'Піоноподібні троянди, ранункулюс', bestFor: 'День народження, зустріч' },
+        // --- Троянди ---
+        { id: 'p1', name: 'Багряна Пристрасть', price: 4500, category: 'roses', tag: 'КЛАСИКА', image: 'https://loremflickr.com/800/800/rose,red,bouquet?lock=1', flowers: 'Червоні троянди Freedom, евкаліпт', bestFor: 'Вітальня, романтична вечеря' },
+        { id: 'p8', name: 'Нічне Сяйво', price: 4900, category: 'roses', tag: 'ПРЕМІУМ', image: 'https://loremflickr.com/800/800/dark,rose,bouquet?lock=2', flowers: 'Темні троянди, сріблястий бруній', bestFor: 'Чоловічий кабінет, вечірка' },
+        { id: 'p11', name: 'Червона Магія', price: 4600, category: 'roses', tag: 'КЛАСИКА', image: 'https://loremflickr.com/800/800/red,rose,magic?lock=3', flowers: 'Троянди Red Naomi, гіперікум', bestFor: 'Ресторан, побачення' },
+        { id: 'p18', name: 'Золотий Світанок', price: 6100, category: 'roses', tag: 'ПРЕМІУМ', image: 'https://loremflickr.com/800/800/yellow,rose,bouquet?lock=4', flowers: 'Золотисті троянди, аспарагус', bestFor: 'Урочистий зал, банкет' },
+        { id: 'p24', name: 'Вогняні Троянди', price: 4700, category: 'roses', tag: 'ПРИСТРАСТЬ', image: 'https://loremflickr.com/800/800/cherry,rose,bouquet?lock=5', flowers: 'Троянди сорту Cherry Love', bestFor: 'Вечір при свічках' },
+        { id: 'p29', name: 'Смарагдова Надія', price: 4400, category: 'roses', tag: 'ПРЕМІУМ', image: 'https://loremflickr.com/800/800/green,rose,bouquet?lock=6', flowers: 'Зелені троянди Jade, салал', bestFor: 'Офіс творчої студії' },
+        // --- Тюльпани ---
+        { id: 'p2', name: 'Весняний Світанок', price: 3200, category: 'tulips', tag: 'НІЖНІСТЬ', image: 'https://loremflickr.com/800/800/pastel,tulips?lock=7', flowers: 'Тюльпани мікс, анемони', bestFor: 'Спальня, світла кухня' },
+        { id: 'p13', name: 'Сонячний Промінь', price: 3100, category: 'tulips', tag: 'ВЕСНА', image: 'https://loremflickr.com/800/800/yellow,tulips?lock=8', flowers: 'Жовті тюльпани, мімоза', bestFor: 'Сніданкова зона, дитяча' },
+        { id: 'p19', name: 'Ранкова Роса', price: 3600, category: 'tulips', tag: 'ВЕСНА', image: 'https://loremflickr.com/800/800/white,tulips?lock=9', flowers: 'Білі тюльпани, вероніка', bestFor: 'Підвіконня, весняна кухня' },
+        // --- Авторський ---
+        { id: 'p3', name: 'Тропічний Рай', price: 5800, category: 'author', tag: 'ЕКЗОТИКА', image: 'https://loremflickr.com/800/800/protea,orchid?lock=10', flowers: 'Протея, орхідеї, стреліція', bestFor: 'Сучасний офіс, лобі' },
+        { id: 'p6', name: 'Бузок та Півонії', price: 6500, category: 'author', tag: 'АВТОРСЬКИЙ', image: 'https://loremflickr.com/800/800/peonies,lilac?lock=11', flowers: 'Півонії, бузок, фрезія', bestFor: 'Світла вітальня, святковий стіл' },
+        { id: 'p12', name: 'Лавандовий Сон', price: 3400, category: 'author', tag: 'РЕЛАКС', image: 'https://loremflickr.com/800/800/lavender,bouquet?lock=12', flowers: 'Лаванда, мускарі, дельфініум', bestFor: 'Ванна кімната, спальня' },
+        { id: 'p17', name: 'Містичний Букет', price: 5900, category: 'author', tag: 'АРТ', image: 'https://loremflickr.com/800/800/calla,monstera?lock=13', flowers: 'Калли, антуріум, монстера', bestFor: 'Мистецька галерея, лофт' },
+        { id: 'p25', name: 'Казковий Ліс', price: 5300, category: 'author', tag: 'ЗАОХОЧЕННЯ', image: 'https://loremflickr.com/800/800/fern,ranunculus?lock=14', flowers: 'Папороть, ранункулюси, мох', bestFor: 'Бібліотека, кабінет' },
+        { id: 'p28', name: 'Королівський Букет', price: 8200, category: 'author', tag: 'ЕКСКЛЮЗИВ', image: 'https://loremflickr.com/800/800/castle,rose,bouquet?lock=15', flowers: 'Троянди Ohara, астільба, жасмин', bestFor: 'Головна вітальня замку' },
+        // --- Моно/Дуо ---
+        { id: 'p4', name: 'Соняшники', price: 2900, category: 'mono', tag: 'ЛІТО', image: 'https://loremflickr.com/800/800/sunflowers,bouquet?lock=16', flowers: 'Соняшники, декоративні злаки', bestFor: 'Тераса, заміський будинок' },
+        { id: 'p7', name: 'Біла Симфонія', price: 3800, category: 'mono', tag: 'ЕЛЕГАНТНІСТЬ', image: 'https://loremflickr.com/800/800/white,rose,bouquet?lock=17', flowers: 'Білі троянди Avalon, лізіантус', bestFor: 'Класичний інтер\'єр, весілля' },
+        { id: 'p14', name: 'Оксамитова Осінь', price: 4300, category: 'mono', tag: 'ТЕПЛО', image: 'https://loremflickr.com/800/800/autumn,dahlia?lock=18', flowers: 'Жоржини, хризантеми, ягоди', bestFor: 'Камінна зона, вітальня' },
+        { id: 'p23', name: 'Білосніжна Лілія', price: 3900, category: 'mono', tag: 'ЧИСТОТА', image: 'https://loremflickr.com/800/800/white,lily,bouquet?lock=19', flowers: 'Лілії Casa Blanca, гіпсофіла', bestFor: 'Дуже світлий інтер\'єр' },
+        { id: 'p26', name: 'Срібний Бриз', price: 4200, category: 'mono', tag: 'СУЧАСНІСТЬ', image: 'https://loremflickr.com/800/800/eucalyptus,bouquet?lock=20', flowers: 'Евкаліпт Срібний долар, брунія', bestFor: 'Хай-тек інтер\'єр' },
+        // --- Квіти в коробці ---
+        { id: 'p5', name: 'Рожева Хмара', price: 4100, category: 'box', tag: 'РОМАНТИКА', image: 'https://loremflickr.com/800/800/pink,flowers,box?lock=21', flowers: 'Гортензія, півонієподібні троянди', bestFor: 'Туалетний столик, подарунок' },
+        { id: 'p15', name: 'Діамантова Коробка', price: 7500, category: 'box', tag: 'ЛЮКС', image: 'https://loremflickr.com/800/800/luxury,roses,box?lock=22', flowers: 'Півонії Сара Бернар, кущові троянди', bestFor: 'Ювілей, особлива подія' },
+        { id: 'p21', name: 'Червоний Оксамит', price: 4800, category: 'box', tag: 'ЕЛЕГАНТНІСТЬ', image: 'https://loremflickr.com/800/800/red,roses,box?lock=23', flowers: 'Троянди, гвоздики, стрічки', bestFor: 'Подарунок керівнику' },
+        { id: 'p30', name: 'Квітковий Десерт', price: 3500, category: 'box', tag: 'МІНІ', image: 'https://loremflickr.com/800/800/macarons,flowers?lock=24', flowers: 'Кущові троянди, макаруни', bestFor: 'Кавовий столик' },
+        // --- Кошики ---
+        { id: 'p10', name: 'Кошик Щастя', price: 5200, category: 'basket', tag: 'ПОДАРУНОК', image: 'https://loremflickr.com/800/800/flowers,basket?lock=25', flowers: 'Альстромерії, хризантеми, гербери', bestFor: 'Передпокій, затишна кухня' },
+        { id: 'p22', name: 'Квіткова Карусель', price: 5500, category: 'basket', tag: 'ЯСКРАВІСТЬ', image: 'https://loremflickr.com/800/800/colorful,gerberas,basket?lock=26', flowers: 'Різнокольорові гербери, солідаго', bestFor: 'День народження, дитяче свято' },
+        // --- Еко ---
+        { id: 'p9', name: 'Еко-Гармонія', price: 2700, category: 'eco', tag: 'ЕКО', image: 'https://loremflickr.com/800/800/dry,flowers,eco?lock=27', flowers: 'Бавовна, сухоцвіти, евкаліпт', bestFor: 'Скандинавський стиль, робочий стіл' },
+        { id: 'p16', name: 'Гірська Свіжість', price: 2800, category: 'eco', tag: 'ЕКО', image: 'https://loremflickr.com/800/800/mountain,flowers,eco?lock=28', flowers: 'Едельвейс, гірські трави', bestFor: 'Дерев\'яний інтер\'єр, балкон' },
+        { id: 'p20', name: 'Польова Пісня', price: 2500, category: 'eco', tag: 'НАТУРАЛЬНІСТЬ', image: 'https://loremflickr.com/800/800/field,flowers,eco?lock=29', flowers: 'Ромашки, волошки, маки', bestFor: 'Дача, обідній стіл' },
+        { id: 'p27', name: 'Океанський Вітер', price: 3700, category: 'eco', tag: 'СВІЖІСТЬ', image: 'https://loremflickr.com/800/800/sea,flowers,eco?lock=30', flowers: 'Ерінгіум, декоративна капуста', bestFor: 'Ванна кімната, хол' }
+    ];
 
-    // 2. Intersection Observer for Scroll Animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    // 2. State Management
+    let currentCategory = 'all';
+    let currentPage = 1;
+    let itemsPerPage = 4;
 
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Apply reveal animation to elements
-    const revealElements = document.querySelectorAll('.reveal-on-scroll');
-    revealElements.forEach(el => {
-        revealObserver.observe(el);
-    });
-
-    // 3. Subtle Mouse Parallax for Hero
-    const hero = document.getElementById('hero');
-    if (hero && window.innerWidth > 1024) {
-        hero.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const moveX = (clientX - window.innerWidth / 2) / 60;
-            const moveY = (clientY - window.innerHeight / 2) / 60;
-
-            const overlay = document.querySelector('.hero-background-overlay');
-            if (overlay) {
-                overlay.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
-            }
-        });
-    }
-
-    // 4. Menu (desktop + mobile)
-    const mobileBtn = document.getElementById('mobile-cta');
+    // 3. UI Helpers
+    const header = document.getElementById('main-header');
+    const mobBtn = document.getElementById('mobile-cta');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
 
-    const isMobile = () => window.innerWidth <= 768;
-
-    let scrollY = 0;
-
-    // Desktop: sidebar open by default, toggle closed/open
-    // Mobile: sidebar closed by default, toggle open/closed with overlay
-
-    const isOpen = () => {
-        if (isMobile()) {
-            return sidebar.classList.contains('open');
-        } else {
-            return !sidebar.classList.contains('closed');
-        }
-    };
-
-    const openMenu = () => {
-        mobileBtn.classList.add('active');
-        if (isMobile()) {
-            sidebar.classList.add('open');
-            if (overlay) overlay.classList.add('active');
-            scrollY = window.scrollY;
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${scrollY}px`;
-            document.body.style.left = '0';
-            document.body.style.right = '0';
-            document.body.style.overflow = 'hidden';
-            document.body.style.overscrollBehavior = 'none';
-        } else {
-            sidebar.classList.remove('closed');
-            document.body.classList.remove('sidebar-closed');
-        }
+    const toggleMenu = () => {
+        const isOpen = mobBtn.classList.toggle('active');
+        sidebar.classList.toggle('active', isOpen);
+        overlay.classList.toggle('active', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+        document.documentElement.style.overflow = isOpen ? 'hidden' : '';
     };
 
     const closeMenu = () => {
-        mobileBtn.classList.remove('active');
-        if (isMobile()) {
-            sidebar.classList.remove('open');
-            if (overlay) overlay.classList.remove('active');
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.left = '';
-            document.body.style.right = '';
-            document.body.style.overflow = '';
-            document.body.style.overscrollBehavior = '';
-            window.scrollTo(0, scrollY);
-        } else {
-            sidebar.classList.add('closed');
-            document.body.classList.add('sidebar-closed');
-        }
+        mobBtn.classList.remove('active');
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
     };
 
-    if (mobileBtn && sidebar) {
-        mobileBtn.addEventListener('click', () => {
-            if (isOpen()) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        });
-    }
+    const isMobile = () => window.innerWidth <= 1024;
 
-    // Close on overlay click (mobile only)
-    if (overlay) {
-        overlay.addEventListener('click', closeMenu);
-    }
+    if (mobBtn) mobBtn.addEventListener('click', toggleMenu);
+    if (overlay) overlay.addEventListener('click', closeMenu);
 
-    // Close menu when a nav link is clicked (mobile only)
-    document.querySelectorAll('#sidebar .nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (isMobile()) closeMenu();
-        });
-    });
-
-    // On resize: reset state to match device
-    window.addEventListener('resize', () => {
-        if (!isMobile()) {
-            // restore desktop state: remove mobile classes
-            sidebar.classList.remove('open');
-            if (overlay) overlay.classList.remove('active');
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.left = '';
-            document.body.style.right = '';
-            document.body.style.overflow = '';
-        } else {
-            // restore mobile state: remove desktop closed
-            sidebar.classList.remove('closed');
-            document.body.classList.remove('sidebar-closed');
-            mobileBtn.classList.remove('active');
-        }
-    });
-
-    // 5. Smooth Internal Links for Single Page Navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    // Sidebar Accordion (Categories)
+    const catToggle = document.querySelector('.nav-categories-toggle');
+    if (catToggle) {
+        catToggle.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+            const parent = catToggle.parentElement;
+            parent.classList.toggle('active');
+        });
+    }
 
-            if (targetElement) {
-                const headerHeight = header.offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
+    // Sidebar Category Logic
+    document.addEventListener('click', (e) => {
+        const catBtn = e.target.closest('[data-category]');
+        if (catBtn) {
+            e.preventDefault();
+            currentCategory = catBtn.dataset.category;
+            currentPage = 1;
+            if (isMobile()) closeMenu();
+
+            // Scroll to catalog title
+            const showcase = document.getElementById('showcase');
+            if (showcase) {
+                const offset = header ? header.offsetHeight : 20;
+                window.scrollTo({ 
+                    top: showcase.getBoundingClientRect().top + window.pageYOffset - offset, 
+                    behavior: 'smooth' 
                 });
             }
-        });
+            renderProducts();
+        }
     });
 
-    // 6. Cart (localStorage) - add items & render cart page
+    const itemsPerPageSelect = document.getElementById('itemsPerPage');
+    if (itemsPerPageSelect) {
+        itemsPerPageSelect.addEventListener('change', (e) => {
+            itemsPerPage = Number(e.target.value);
+            currentPage = 1;
+            renderProducts();
+        });
+    }
+
+    // 4. Products Rendering
+    const productGrid = document.querySelector('.product-grid');
+    const paginationBase = document.querySelector('.pagination');
+
+    const formatPrice = (value) => `${(Number(value) || 0).toLocaleString('uk-UA')} ₴`;
+
+    const renderProducts = () => {
+        if (!productGrid) return;
+
+        const filtered = products.filter(p => currentCategory === 'all' || p.category === currentCategory);
+        const totalPages = Math.ceil(filtered.length / itemsPerPage);
+        
+        if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+        
+        const start = (currentPage - 1) * itemsPerPage;
+        const pageItems = filtered.slice(start, start + itemsPerPage);
+
+        productGrid.innerHTML = pageItems.map(p => `
+            <div class="product-card glass">
+                <a href="product.html?id=${p.id}" class="product-link">
+                    <img class="product-image" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/${p.id}/600/700'">
+                </a>
+                <div class="product-content">
+                    <span class="series-tag">${p.tag}</span>
+                    <a href="product.html?id=${p.id}" class="product-title-link">
+                        <h3>${p.name}</h3>
+                    </a>
+                    <p class="price">${formatPrice(p.price)}</p>
+                    <button class="btn-glow add-to-cart" 
+                            data-product-id="${p.id}"
+                            data-product-name="${p.name}"
+                            data-product-price="${p.price}"
+                            data-product-image="${p.image}">У кошик</button>
+                </div>
+            </div>
+        `).join('');
+
+        renderPagination(totalPages);
+        attachAddToCartEvents();
+    };
+
+    const renderPagination = (totalPages) => {
+        if (!paginationBase) return;
+        if (totalPages <= 1) {
+            paginationBase.innerHTML = '';
+            return;
+        }
+
+        const prevDis = currentPage === 1 ? ' disabled' : '';
+        const nextDis = currentPage === totalPages ? ' disabled' : '';
+
+        let btns = `<button class="page-btn page-nav" id="pg-prev"${prevDis}>&#8592; Назад</button>`;
+        for (let i = 1; i <= totalPages; i++) {
+            btns += `<button class="page-btn${i === currentPage ? ' active' : ''}" data-page="${i}">${i}</button>`;
+        }
+        btns += `<button class="page-btn page-nav" id="pg-next"${nextDis}>Вперед &#8594;</button>`;
+        paginationBase.innerHTML = btns;
+
+        const scrollToTop = () => window.scrollTo({ top: document.getElementById('showcase').offsetTop - 100, behavior: 'smooth' });
+
+        paginationBase.querySelectorAll('.page-btn[data-page]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentPage = Number(btn.dataset.page);
+                renderProducts();
+                scrollToTop();
+            });
+        });
+
+        paginationBase.querySelector('#pg-prev')?.addEventListener('click', () => {
+            if (currentPage > 1) { currentPage--; renderProducts(); scrollToTop(); }
+        });
+
+        paginationBase.querySelector('#pg-next')?.addEventListener('click', () => {
+            if (currentPage < totalPages) { currentPage++; renderProducts(); scrollToTop(); }
+        });
+    };
+
+
+    // 5. Cart Persistence
     const CART_KEY = 'florahome_cart_v1';
-
-    const loadCart = () => {
-        try {
-            const raw = localStorage.getItem(CART_KEY);
-            return raw ? JSON.parse(raw) : [];
-        } catch (e) {
-            return [];
-        }
+    const loadCart = () => JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    const saveCart = (items, shouldPulse = false) => {
+        localStorage.setItem(CART_KEY, JSON.stringify(items));
+        updateCartBadge(shouldPulse);
     };
 
-    const saveCart = (items) => {
-        try {
-            localStorage.setItem(CART_KEY, JSON.stringify(items));
-        } catch (e) {
-            // ignore storage errors
-        }
-    };
-
-    const formatPrice = (value) => {
-        const n = Number(value) || 0;
-        return `${n.toLocaleString('uk-UA')} ₴`;
-    };
-
-    const addItemToCart = (payload) => {
+    const updateCartBadge = (shouldPulse = false) => {
         const cart = loadCart();
-        const existing = cart.find(x => x.id === payload.id);
-
-        if (existing) {
-            existing.qty += 1;
-        } else {
-            cart.push({
-                id: payload.id,
-                name: payload.name,
-                price: Number(payload.price) || 0,
-                image: payload.image || '',
-                qty: 1,
-            });
-        }
-
-        saveCart(cart);
-        return cart;
+        const total = cart.reduce((s, x) => s + x.qty, 0);
+        document.querySelectorAll('a[href="cart.html"]').forEach(link => {
+            let badge = link.querySelector('.cart-badge');
+            if (total > 0) {
+                if (!badge) {
+                    badge = document.createElement('span');
+                    badge.className = 'cart-badge';
+                    link.appendChild(badge);
+                }
+                badge.textContent = total;
+                if (shouldPulse) {
+                    badge.classList.add('pulse');
+                    setTimeout(() => badge.classList.remove('pulse'), 600);
+                }
+            } else if (badge) badge.remove();
+        });
     };
 
-    // Add-to-cart buttons (index page)
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const cart = addItemToCart({
-                id: btn.dataset.productId,
-                name: btn.dataset.productName,
-                price: btn.dataset.productPrice,
-                image: btn.dataset.productImage
+    const attachAddToCartEvents = () => {
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.dataset.productId;
+                let cart = loadCart();
+                const idx = cart.findIndex(x => x.id === id);
+                if (idx > -1) cart[idx].qty++;
+                else {
+                    cart.push({
+                        id,
+                        name: btn.dataset.productName,
+                        price: Number(btn.dataset.productPrice),
+                        image: btn.dataset.productImage,
+                        qty: 1
+                    });
+                }
+                saveCart(cart, true);
+                btn.textContent = 'Додано';
+                setTimeout(() => btn.textContent = 'У кошик', 1000);
             });
-
-            // Small UX: briefly change button text
-            const originalText = btn.textContent;
-            btn.textContent = 'Додано';
-            btn.disabled = true;
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }, 900);
         });
-    });
+    };
 
-    // Cart page rendering
+    // 6. Product Detail View
+    const detailContainer = document.getElementById('product-detail');
+    if (detailContainer) {
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('id');
+        const product = products.find(p => p.id === productId);
+
+        if (product) {
+            detailContainer.innerHTML = `
+                <div class="product-detail-layout glass">
+                    <img class="detail-image" src="${product.image}" alt="${product.name}" onerror="this.onerror=null;this.src='https://picsum.photos/seed/${product.id}/800/800'">
+                    <div class="detail-content">
+                        <span class="series-tag">${product.tag}</span>
+                        <h1>${product.name}</h1>
+                        <p class="price">${formatPrice(product.price)}</p>
+                        <div class="detail-info">
+                            <div class="info-group">
+                                <h3>Склад букета</h3>
+                                <p>${product.flowers}</p>
+                            </div>
+                            <div class="info-group">
+                                <h3>Краще для</h3>
+                                <p>${product.bestFor}</p>
+                            </div>
+                        </div>
+                        <button class="btn-glow add-to-cart detail-add-btn" 
+                                data-product-id="${product.id}"
+                                data-product-name="${product.name}"
+                                data-product-price="${product.price}"
+                                data-product-image="${product.image}">Додати у кошик</button>
+                    </div>
+                </div>
+            `;
+            attachAddToCartEvents();
+        } else {
+            detailContainer.innerHTML = '<h2>Товар не знайдено</h2>';
+        }
+    }
+
+    // 7. Cart Page
     const cartItemsEl = document.getElementById('cart-items');
     if (cartItemsEl) {
-        const cartEmptyEl = document.getElementById('cart-empty');
-        const cartTotalEl = document.getElementById('cart-total');
-        const checkoutBtn = document.getElementById('checkout-btn');
-        const clearBtn = document.getElementById('clear-cart-btn');
-
-        const renderCart = () => {
+        const renderCartPage = () => {
             const cart = loadCart();
-
             if (!cart.length) {
-                if (cartEmptyEl) cartEmptyEl.style.display = 'block';
-                if (cartItemsEl) cartItemsEl.innerHTML = '';
-                if (cartTotalEl) cartTotalEl.textContent = formatPrice(0);
-                if (checkoutBtn) checkoutBtn.disabled = true;
+                cartItemsEl.innerHTML = '<div class="glass" style="padding:4rem;text-align:center;"><h2>Ваш кошик порожній</h2><a href="index.html#showcase" class="btn-glow">До каталогу</a></div>';
+                document.getElementById('cart-total').textContent = formatPrice(0);
                 return;
             }
-
-            if (cartEmptyEl) cartEmptyEl.style.display = 'none';
-
-            cartItemsEl.innerHTML = cart.map(item => {
-                const lineTotal = item.price * item.qty;
-                return `
-                    <div class="cart-item" data-product-id="${item.id}">
-                        <div class="cart-item-left">
-                            ${item.image ? `<img class="cart-item-img" src="${item.image}" alt="${item.name}">` : ''}
-                            <div class="cart-item-meta">
-                                <div class="cart-item-name" title="${item.name}">${item.name}</div>
-                                <div class="cart-item-price">${formatPrice(item.price)}</div>
-                            </div>
-                        </div>
-
-                        <div class="cart-item-right">
-                            <div class="cart-qty">
-                                <button class="cart-qty-btn" type="button" data-cart-action="dec" data-product-id="${item.id}" aria-label="Зменшити кількість">−</button>
-                                <input class="cart-qty-input" type="number" min="1" step="1"
-                                    value="${item.qty}"
-                                    data-cart-action="set-qty"
-                                    data-product-id="${item.id}"
-                                    aria-label="Кількість">
-                                <button class="cart-qty-btn" type="button" data-cart-action="inc" data-product-id="${item.id}" aria-label="Збільшити кількість">+</button>
-                            </div>
-                            <div class="cart-line-total">${formatPrice(lineTotal)}</div>
-                            <button class="cart-remove-btn" type="button" data-cart-action="remove" data-product-id="${item.id}">Видалити</button>
-                        </div>
+            cartItemsEl.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" style="width:80px;height:80px;border-radius:10px;object-fit:cover;">
+                    <div style="flex:1;">
+                        <h3>${item.name}</h3>
+                        <p>${formatPrice(item.price)} x ${item.qty}</p>
                     </div>
-                `;
-            }).join('');
+                    <button class="btn-outline remove-item" data-id="${item.id}">X</button>
+                </div>
+            `).join('');
+            
+            const total = cart.reduce((s, x) => s + x.price * x.qty, 0);
+            document.getElementById('cart-total').textContent = formatPrice(total);
 
-            if (cartTotalEl || checkoutBtn) {
-                const total = cart.reduce((sum, x) => sum + x.price * x.qty, 0);
-                if (cartTotalEl) cartTotalEl.textContent = formatPrice(total);
-                if (checkoutBtn) checkoutBtn.disabled = false;
+            // Enable checkout if cart has items
+            const checkoutBtn = document.getElementById('checkout-btn');
+            if (checkoutBtn) checkoutBtn.disabled = false;
+            
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    let c = loadCart().filter(x => x.id !== btn.dataset.id);
+                    saveCart(c);
+                    renderCartPage();
+                });
+            });
+
+            const clearBtn = document.getElementById('clear-cart-btn');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    saveCart([]);
+                    renderCartPage();
+                });
             }
         };
-
-        cartItemsEl.addEventListener('click', (e) => {
-            const actionBtn = e.target.closest('[data-cart-action]');
-            if (!actionBtn) return;
-
-            const id = actionBtn.dataset.productId;
-            const action = actionBtn.dataset.cartAction;
-
-            const cart = loadCart();
-            const item = cart.find(x => x.id === id);
-            if (!item) return;
-
-            if (action === 'remove') {
-                const updated = cart.filter(x => x.id !== id);
-                saveCart(updated);
-            } else if (action === 'inc') {
-                item.qty += 1;
-                saveCart(cart);
-            } else if (action === 'dec') {
-                item.qty -= 1;
-                if (item.qty <= 0) {
-                    saveCart(cart.filter(x => x.id !== id));
-                } else {
-                    saveCart(cart);
-                }
-            }
-
-            renderCart();
-        });
-
-        cartItemsEl.addEventListener('change', (e) => {
-            const input = e.target;
-            if (!input || input.dataset.cartAction !== 'set-qty') return;
-
-            const id = input.dataset.productId;
-            const qty = Math.max(1, parseInt(input.value, 10) || 1);
-
-            const cart = loadCart();
-            const item = cart.find(x => x.id === id);
-            if (!item) return;
-
-            item.qty = qty;
-            saveCart(cart);
-            renderCart();
-        });
-
-        if (clearBtn) {
-            clearBtn.addEventListener('click', () => {
-                saveCart([]);
-                renderCart();
-            });
-        }
-
-        if (checkoutBtn) {
-            checkoutBtn.addEventListener('click', () => {
-                const cart = loadCart();
-                if (!cart.length) return;
-                alert('Замовлення оформлено (демо).');
-            });
-        }
-
-        renderCart();
+        renderCartPage();
     }
+
+    // 8. Scroll Reveal (IntersectionObserver)
+    const initScrollReveal = () => {
+        const items = document.querySelectorAll('.reveal-on-scroll');
+        if (!items.length) return;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        items.forEach(el => observer.observe(el));
+    };
+
+    // Init
+    renderProducts();
+    updateCartBadge();
+    initScrollReveal();
+    // Re-run after products render so dynamically added cards are observed
+    setTimeout(initScrollReveal, 50);
 });
+

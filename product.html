@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="FloraHome - Корзина">
-    <title>Корзина | FloraHome</title>
+    <meta name="description" content="FloraHome - Деталі букета">
+    <title>Деталі букета | FloraHome</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -34,34 +34,15 @@
         </div>
         <ul class="nav-links">
             <li><a href="index.html#hero">Головна</a></li>
-            <li><a href="index.html#tech">Особливості</a></li>
-            <li><a href="index.html#showcase">Букети</a></li>
+            <li><a href="index.html#showcase">Каталог</a></li>
             <li><a href="cart.html">Корзина</a></li>
         </ul>
     </aside>
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-    <main style="padding-top: 150px;">
+    <main style="padding-top: 150px; padding-bottom: 100px;">
         <div class="container">
-            <h2 class="section-title" style="margin-bottom: 2rem;">Ваша корзина</h2>
-
-            <div class="cart-glass glass">
-                <div id="cart-empty" class="cart-empty">
-                    Кошик порожній. Натисніть “У кошик” у товарах, щоб додати їх сюди.
-                </div>
-
-                <div id="cart-items" class="cart-items"></div>
-
-                <div class="cart-summary">
-                    <div class="cart-total-line">
-                        Разом: <span id="cart-total" class="cart-total">0 ₴</span>
-                    </div>
-                    <div class="cart-actions">
-                        <button id="clear-cart-btn" class="btn-outline" type="button">Очистити</button>
-                        <button id="checkout-btn" class="btn-glow" type="button" disabled>Оформити</button>
-                    </div>
-                </div>
-            </div>
+            <div id="product-detail"></div>
         </div>
     </main>
 
@@ -81,4 +62,3 @@
 </body>
 
 </html>
-

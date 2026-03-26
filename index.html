@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 
 <head>
     <meta charset="UTF-8">
@@ -11,34 +11,56 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?v=16">
+    <link rel="stylesheet" href="assets/css/style.css?v=33">
 </head>
 
 <body>
     <header id="main-header">
         <nav class="container">
-            <div class="logo">Flora<span>Home</span></div>
+            <a href="index.html" class="logo">Flora<span>Home</span></a>
+            <div class="header-actions">
+                <a href="cart.html" class="header-cart-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                </a>
+                <div class="mobile-menu-btn" id="mobile-cta">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </nav>
     </header>
-    <div class="mobile-menu-btn" id="mobile-cta">
-        <span></span>
-        <span></span>
-    </div>
 
     <aside id="sidebar" class="sidebar glass">
         <div class="sidebar-header">
-            <div class="logo">Flora<span>Home</span></div>
+            <a href="index.html" class="logo">Flora<span>Home</span></a>
         </div>
         <ul class="nav-links">
             <li><a href="#hero">Головна</a></li>
             <li><a href="#tech">Особливості</a></li>
             <li><a href="#showcase">Букети</a></li>
+            <li class="nav-item-has-children">
+                <a href="#categories" class="nav-categories-toggle">
+                    Категорії
+                    <svg class="nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </a>
+                <ul class="nav-subnav">
+                    <li><a href="#categories" data-category="all">Всі букети</a></li>
+                    <li><a href="#categories" data-category="bouquet-dnya">Букет дня</a></li>
+                    <li><a href="#categories" data-category="roses">Рози</a></li>
+                    <li><a href="#categories" data-category="author">Авторський букет</a></li>
+                    <li><a href="#categories" data-category="mono">Моно/Дуо букет</a></li>
+                    <li><a href="#categories" data-category="tulips">Тюльпани</a></li>
+                    <li><a href="#categories" data-category="basket">Корзина квітів</a></li>
+                    <li><a href="#categories" data-category="box">Квіти в коробці</a></li>
+                    <li><a href="#categories" data-category="eco">Еко-букет</a></li>
+                </ul>
+            </li>
             <li><a href="cart.html">Корзина</a></li>
         </ul>
     </aside>
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-    <main>
+    <main id="main-content">
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
             <div class="hero-content container">
@@ -74,120 +96,41 @@
             </div>
         </section>
 
-        <!-- Product Showcase (Single Page Integration) -->
+        <!-- Shop Section -->
         <section id="showcase" class="showcase-section">
             <div class="container">
-                <h2 class="section-title">Хіти продажів</h2>
-
-                <div class="product-grid">
-                    <!-- Unit 1 -->
-                    <div class="product-card glass reveal-on-scroll">
-                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=800&auto=format&fit=crop');"></div>
-                        <div class="product-content">
-                            <span class="series-tag">КЛАСИКА</span>
-                            <h3>«Багряна Пристрасть»</h3>
-                            <p class="price">4 500 ₴</p>
-                            <button class="btn-glow add-to-cart" type="button"
-                                data-product-id="bouquet-1"
-                                data-product-name="«Багряна Пристрасть»"
-                                data-product-price="4500"
-                                data-product-image="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=800&auto=format&fit=crop">У кошик</button>
-                        </div>
-                    </div>
-
-                    <!-- Unit 2 -->
-                    <div class="product-card glass reveal-on-scroll">
-                        <div class="product-image" style="background-image: url('assets/images/tender_bouquet.png');"></div>
-                        <div class="product-content">
-                            <span class="series-tag">НІЖНІСТЬ</span>
-                            <h3>«Весняний Світанок»</h3>
-                            <p class="price">3 200 ₴</p>
-                            <button class="btn-glow add-to-cart" type="button"
-                                data-product-id="bouquet-2"
-                                data-product-name="«Весняний Світанок»"
-                                data-product-price="3200"
-                                data-product-image="assets/images/tender_bouquet.png">У кошик</button>
-                        </div>
-                    </div>
-
-                    <!-- Unit 3 -->
-                    <div class="product-card glass reveal-on-scroll">
-                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1563241527-3004b7be0ffd?q=80&w=800&auto=format&fit=crop');"></div>
-                        <div class="product-content">
-                            <span class="series-tag">ЕКЗОТИКА</span>
-                            <h3>«Тропічний Рай»</h3>
-                            <p class="price">5 800 ₴</p>
-                            <button class="btn-glow add-to-cart" type="button"
-                                data-product-id="bouquet-3"
-                                data-product-name="«Тропічний Рай»"
-                                data-product-price="5800"
-                                data-product-image="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?q=80&w=800&auto=format&fit=crop">У кошик</button>
-                        </div>
-                    </div>
-
-                    <!-- Unit 4 -->
-                    <div class="product-card glass reveal-on-scroll">
-                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1508610048659-a06b669e3321?q=80&w=800&auto=format&fit=crop');"></div>
-                        <div class="product-content">
-                            <span class="series-tag">ЛІТО</span>
-                            <h3>«Соняшники»</h3>
-                            <p class="price">2 900 ₴</p>
-                            <button class="btn-glow add-to-cart" type="button"
-                                data-product-id="bouquet-4"
-                                data-product-name="«Соняшники»"
-                                data-product-price="2900"
-                                data-product-image="https://images.unsplash.com/photo-1508610048659-a06b669e3321?q=80&w=800&auto=format&fit=crop">У кошик</button>
-                        </div>
-                    </div>
-
-                    <!-- Unit 5 -->
-                    <div class="product-card glass reveal-on-scroll">
-                        <div class="product-image" style="background-image: url('assets/images/pink_cloud_bouquet.png');"></div>
-                        <div class="product-content">
-                            <span class="series-tag">РОМАНТИКА</span>
-                            <h3>«Рожева хмара»</h3>
-                            <p class="price">4 100 ₴</p>
-                            <button class="btn-glow add-to-cart" type="button"
-                                data-product-id="bouquet-5"
-                                data-product-name="«Рожева хмара»"
-                                data-product-price="4100"
-                                data-product-image="assets/images/pink_cloud_bouquet.png">У кошик</button>
-                        </div>
-                    </div>
-
-                    <!-- Unit 6 -->
-                    <div class="product-card glass reveal-on-scroll">
-                        <div class="product-image" style="background-image: url('assets/images/author_bouquet.png');"></div>
-                        <div class="product-content">
-                            <span class="series-tag">АВТОРСЬКИЙ</span>
-                            <h3>«Бузок та півонії»</h3>
-                            <p class="price">6 500 ₴</p>
-                            <button class="btn-glow add-to-cart" type="button"
-                                data-product-id="bouquet-6"
-                                data-product-name="«Бузок та півонії»"
-                                data-product-price="6500"
-                                data-product-image="assets/images/author_bouquet.png">У кошик</button>
-                        </div>
+                <div class="shop-header">
+                    <h2 class="section-title">Каталог букетів</h2>
+                    <div class="items-per-page-container">
+                        <label for="itemsPerPage">Показувати по:</label>
+                        <select id="itemsPerPage">
+                            <option value="4" selected>4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                        </select>
                     </div>
                 </div>
+                
+                <div class="shop-layout" style="display: block;">
+                    <div class="shop-main">
+                        <div class="product-grid">
+                            <!-- Dynamically loaded -->
+                        </div>
 
-                <!-- Pagination -->
-                <div class="pagination reveal-on-scroll">
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                    <button class="page-btn">Далі &rarr;</button>
+                        <!-- Pagination -->
+                        <div class="pagination reveal-on-scroll">
+                            <!-- Dynamically loaded -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <!-- CTA Section removed -->
     </main>
 
     <footer id="main-footer">
         <div class="container footer-grid">
             <div class="footer-info">
-                <div class="logo">Flora<span>Home</span></div>
+                <a href="index.html" class="logo">Flora<span>Home</span></a>
                 <p>Ексклюзивні квіткові композиції на будь-який смак.</p>
             </div>
             <div class="footer-bottom">
@@ -196,7 +139,7 @@
         </div>
     </footer>
 
-    <script src="assets/js/main.js?v=7"></script>
+    <script src="assets/js/main.js?v=18"></script>
 </body>
 
 </html>
