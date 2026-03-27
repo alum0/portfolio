@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.overflow = '';
     };
 
-    const isMobile = () => window.innerWidth <= 1024;
+    const isMobile = () => window.innerWidth <= 1366;
 
     if (mobBtn) mobBtn.addEventListener('click', toggleMenu);
     if (overlay) overlay.addEventListener('click', closeMenu);
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const productGrid = document.querySelector('.product-grid');
     const paginationBase = document.querySelector('.pagination');
 
-    const formatPrice = (value) => `${(Number(value) || 0).toLocaleString('uk-UA')} ₴`;
+    const formatPrice = (value) => `${(Number(value) || 0).toLocaleString('uk-UA')}\u00A0₴`;
 
     const renderProducts = () => {
         if (!productGrid) return;

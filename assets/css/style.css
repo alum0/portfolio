@@ -544,6 +544,7 @@ section {
     margin: auto 0 1.5rem;
     -webkit-text-fill-color: var(--clr-primary);
     background: none;
+    white-space: nowrap;
 }
 
 .product-link,
@@ -939,8 +940,8 @@ footer {
    RESPONSIVE BREAKPOINTS
    ===================== */
 
-/* --- TABLET + MOBILE (≤ 1024px): off-canvas sidebar, header visible --- */
-@media (max-width: 1024px) {
+/* --- TABLET + MOBILE (≤ 1366px): off-canvas sidebar, header visible --- */
+@media (max-width: 1366px) {
     :root {
         --header-h: 72px;
         --header-p: 1.1rem 0;
@@ -1085,8 +1086,8 @@ footer {
     .cart-item-right { align-items: flex-start; }
 }
 
-/* --- Desktop only (≥ 1025px) --- */
-@media (min-width: 1025px) {
+/* --- Desktop only (≥ 1367px) --- */
+@media (min-width: 1367px) {
     #main-header { display: none; }
     main { margin-left: var(--sidebar-w); }
     #main-footer { margin-left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); }
@@ -1095,6 +1096,6 @@ footer {
 }
 
 /* 3 columns on large-ish desktop */
-@media (max-width: 1200px) and (min-width: 1025px) {
+@media (max-width: 1440px) and (min-width: 1367px) {
     .product-grid { grid-template-columns: repeat(3, 1fr); }
 }
