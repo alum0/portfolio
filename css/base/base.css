@@ -1,0 +1,80 @@
+:root {
+    /* Color Palette - Bright Floral */
+    --clr-bg: hsl(35, 40%, 96%);
+    --clr-surface: hsl(35, 45%, 92%);
+    --clr-primary: hsl(0, 80%, 55%);
+    --clr-secondary: hsl(120, 60%, 40%);
+    --clr-accent: hsl(45, 90%, 50%);
+    --clr-text-main: hsl(120, 30%, 15%);
+    --clr-text-muted: hsl(120, 20%, 40%);
+
+    /* Header Variables */
+    --header-p: 2.5rem 0;
+    --header-h: 124px;
+
+    /* Gradients */
+    --grad-primary: linear-gradient(135deg, hsl(0, 80%, 55%) 0%, hsl(45, 90%, 50%) 100%);
+    --grad-glow: radial-gradient(circle at center, hsla(0, 80%, 55%, 0.2) 0%, transparent 70%);
+
+    /* Layout */
+    --container-width: 1300px;
+    --transition-smooth: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+
+    --glass-bg: hsla(35, 45%, 94%, 0.6);
+    --glass-border: hsla(35, 40%, 70%, 0.4);
+    --glass-shadow: 0 8px 32px 0 rgba(120, 100, 80, 0.15);
+    --glass-blur: blur(25px);
+
+    /* Sidebar width */
+    --sidebar-w: 280px;
+}
+
+/* Base Reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--clr-bg);
+    color: var(--clr-text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+/* Typography */
+h1, h2, h3 {
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+}
+
+h1 { font-size: 3.8rem; }
+h2 { font-size: 2.8rem; text-align: center; margin-bottom: 4rem; }
+h3 { font-size: 2rem; margin-bottom: 1.5rem; }
+
+.logo span {
+    background: var(--grad-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
