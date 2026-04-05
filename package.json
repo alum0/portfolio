@@ -1,0 +1,26 @@
+{
+  "name": "florahome",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "homepage": "https://alum0.github.io/portfolio/",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "echo Starting deployment...",
+    "deploy": "gh-pages -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alum0/portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alum0/portfolio/issues"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
